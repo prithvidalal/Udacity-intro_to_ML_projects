@@ -142,7 +142,8 @@ def train_model(model, criterion, scheduler, num_epochs = 20, device = 'cuda'):
                     loss = criterion(outputs, labels)
                     
                     # preds contains row tensor of best predicted class name of an image
-                    _, preds = torch.max(outputs, 1)
+                    ps = torch.exp(outputs)
+                    _, preds = torch.max(ps, 1)
                     
                     # backward + optimize only if in training phase
                     if phase == 'train':
