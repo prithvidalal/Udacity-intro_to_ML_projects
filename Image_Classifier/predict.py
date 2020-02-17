@@ -8,7 +8,6 @@ import torch
 import numpy as np
 
 from math import ceil
-from train import check_gpu
 from torchvision import models, transforms
 
 """
@@ -41,11 +40,6 @@ def arg_parser():
     parser.add_argument('--category_names', 
                         type=str, 
                         help='Mapping from categories to real names.')
-
-    # Add GPU Option to parser
-    parser.add_argument('--gpu', 
-                        action="store_true", 
-                        help='Use GPU + Cuda for calculations')
 
     # Parse args
     args = parser.parse_args()
@@ -163,9 +157,6 @@ def main():
     
     # Process Image
     image_tensor = process_image(args.image)
-    
-    # Check for GPU
-    device = check_gpu(gpu_arg=args.gpu);
     
     # Use `processed_image` to predict the top K most likely classes
     top_probs, top_labels, top_flowers = predict(image_tensor, model, 
