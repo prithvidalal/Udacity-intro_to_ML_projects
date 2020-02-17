@@ -159,7 +159,7 @@ def main():
         cat_to_name = json.load(f)
         
     # Load model trained with train.py
-    model = save_checkpoint(args.checkpoint)
+    model = load_checkpoint(args.checkpoint)
     
     # Process Image
     image_tensor = process_image(args.image)
